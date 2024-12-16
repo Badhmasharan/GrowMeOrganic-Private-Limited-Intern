@@ -1,0 +1,97 @@
+.App {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+
+.p-datatable thead > tr > th {
+  
+  color: rgb(0, 0, 0); 
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  
+}
+
+.p-datatable thead > tr > th .pi {
+  margin-right: 8px; 
+}
+
+
+.row-selection-panel {
+  margin-bottom: 20px;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+}
+.custom-overlay {
+  padding: 12px;
+}
+
+.custom-overlay input {
+  width: 120px;
+}
+.p-button-outlined-down{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  color: black;
+}
+
+.p-datatable .p-paginator {
+  background-color: #e7faff2c; 
+  border-radius: 5px;
+  padding: 8px;
+
+}
+
+
+.p-datatable .p-paginator button {
+  background-color: #008afbb4;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 3px;
+  margin: 0 4px;
+}
+
+
+.p-datatable .p-paginator button:hover {
+  border: 1px solid #0088ff;
+  
+}
+
+
+.p-datatable .p-paginator button.p-highlight {
+  background-color: #0047d4; 
+}
+
+
+.custom-overlay {
+  background-color: #ffffff;
+  border: 1px solid #0088ff; 
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  box-sizing: border-box;
+}
+
+
+.custom-overlay input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+
+.custom-overlay .p-button {
+  width: 100%;
+  background-color: #015fd3;
+  color: white;
+  border-radius: 4px;
+  padding: 10px;
+}
+
