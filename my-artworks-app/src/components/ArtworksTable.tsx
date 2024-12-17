@@ -17,7 +17,7 @@ const ArtworksTable: React.FC = () => {
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const overlayPanelRef = useRef<OverlayPanel>(null);
 
-
+  // Fetch artworks from the API
   const fetchArtworks = async (page: number, limit = 12) => {
     setLoading(true);
     try {
@@ -45,6 +45,7 @@ const ArtworksTable: React.FC = () => {
     }
   };
 
+  // Load data for the current page
   const loadData = async (page: number) => {
     const pageData = await fetchArtworks(page);
     setData(pageData);
@@ -54,11 +55,12 @@ const ArtworksTable: React.FC = () => {
     loadData(currentPage);
   }, [currentPage]);
 
-
+  // Handle selection change
   const onSelectionChange = (e: any) => {
     setSelectedRows(e.value);
   };
 
+  // Handle selecting rows based on user input
   const handleRowSelection = async () => {
     const count = parseInt(rowCount, 10);
 
@@ -68,24 +70,28 @@ const ArtworksTable: React.FC = () => {
     }
 
     let selected = [...selectedRows];
-    let remainingCount = count - selected.length;
+    let availableRows = [...data];
     let nextPage = currentPage;
-    let availableRows = data.slice(0, count);
 
-    while (remainingCount > 0 && selected.length < count) {
+    // Add rows from available data and fetch additional pages if needed
+    while (selected.length < count) {
+      const remainingRows = availableRows.slice(0, count - selected.length);
+      selected = [...selected, ...remainingRows];
+
+      if (selected.length >= count) break;
+
       nextPage += 1;
       const nextPageData = await fetchArtworks(nextPage);
 
-      if (nextPageData.length === 0) break;
-      availableRows = [...availableRows, ...nextPageData];
-      remainingCount -= nextPageData.length;
+      if (nextPageData.length === 0) break; // No more data available
+      availableRows = [...nextPageData];
     }
 
-    selected = availableRows.slice(0, count);
-    setSelectedRows(selected);
+    setSelectedRows(selected.slice(0, count));
     overlayPanelRef.current?.hide();
   };
 
+  // Handle page change
   const onPageChange = async (e: any) => {
     const newPage = e.page + 1;
     setCurrentPage(newPage);
@@ -108,15 +114,18 @@ const ArtworksTable: React.FC = () => {
         loading={loading}
         lazy
       >
-        <Column selectionMode="multiple" headerStyle={{ width: '3rem', textAlign: 'center' }} />
+        <Column
+          selectionMode="multiple"
+          headerStyle={{ width: "3rem", textAlign: "center" }}
+        />
         <Column
           field="title"
           header={
             <div style={{ display: "flex", alignItems: "center" }}>
               <Button
-               icon="pi pi-chevron-down"
+                icon="pi pi-chevron-down"
                 onClick={(e) => overlayPanelRef.current?.toggle(e)}
-                className="p-button-outlined-down"
+                className="p-button-outlined"
                 style={{ marginLeft: "8px" }}
               />
               <span>Title</span>

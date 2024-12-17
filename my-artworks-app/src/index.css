@@ -36,7 +36,9 @@
   background-color: rgba(255, 255, 255, 0);
   color: black;
 }
-
+.p-button-outlined{
+  border: none;
+}
 .p-datatable .p-paginator {
   background-color: #e7faff2c; 
   border-radius: 5px;
