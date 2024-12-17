@@ -17,7 +17,6 @@ const ArtworksTable: React.FC = () => {
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const overlayPanelRef = useRef<OverlayPanel>(null);
 
-  // Fetch artworks from the API
   const fetchArtworks = async (page: number, limit = 12) => {
     setLoading(true);
     try {
@@ -45,7 +44,6 @@ const ArtworksTable: React.FC = () => {
     }
   };
 
-  // Load data for the current page
   const loadData = async (page: number) => {
     const pageData = await fetchArtworks(page);
     setData(pageData);
@@ -55,12 +53,10 @@ const ArtworksTable: React.FC = () => {
     loadData(currentPage);
   }, [currentPage]);
 
-  // Handle selection change
   const onSelectionChange = (e: any) => {
     setSelectedRows(e.value);
   };
 
-  // Handle selecting rows based on user input
   const handleRowSelection = async () => {
     const count = parseInt(rowCount, 10);
 
@@ -73,7 +69,7 @@ const ArtworksTable: React.FC = () => {
     let availableRows = [...data];
     let nextPage = currentPage;
 
-    // Add rows from available data and fetch additional pages if needed
+ 
     while (selected.length < count) {
       const remainingRows = availableRows.slice(0, count - selected.length);
       selected = [...selected, ...remainingRows];
@@ -83,7 +79,7 @@ const ArtworksTable: React.FC = () => {
       nextPage += 1;
       const nextPageData = await fetchArtworks(nextPage);
 
-      if (nextPageData.length === 0) break; // No more data available
+      if (nextPageData.length === 0) break; 
       availableRows = [...nextPageData];
     }
 
@@ -91,7 +87,7 @@ const ArtworksTable: React.FC = () => {
     overlayPanelRef.current?.hide();
   };
 
-  // Handle page change
+ 
   const onPageChange = async (e: any) => {
     const newPage = e.page + 1;
     setCurrentPage(newPage);
